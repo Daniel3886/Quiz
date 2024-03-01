@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Quiz dla baz danych</title>
+  <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+    <!-- Include jQuery from Google CDN -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!-- Load your questions.js script -->
+<script src="./questions.js"></script>
+<div id="quiz">
+    <h1 id="quiz-name"></h1>
+    <button id="submit-button">Submit Answers</button>
+    <button id="next-question-button">Next Question</button>
+    <button id="prev-question-button">Previous</button>
+    
+    <div id="quiz-results">
+      <p id="quiz-results-message"></p>
+      <p id="quiz-results-score"></p>
+      <button id="quiz-retry-button">Retry</button>
+    </div>
+  </div>
+</body>
+</html>
