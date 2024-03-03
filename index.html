@@ -1,25 +1,66 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Quiz dla baz danych</title>
-  <link rel="stylesheet" type="text/css" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Loading Animation</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Include jQuery from Google CDN -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<!-- Load your questions.js script -->
-<script src="./questions.js"></script>
-<div id="quiz">
-    <h1 id="quiz-name"></h1>
-    <button id="submit-button">Submit Answers</button>
-    <button id="next-question-button">Next Question</button>
-    <button id="prev-question-button">Previous</button>
-    
-    <div id="quiz-results">
-      <p id="quiz-results-message"></p>
-      <p id="quiz-results-score"></p>
-      <button id="quiz-retry-button">Retry</button>
+  <div class="preload">
+    <div class="loader">
+      <div class="loader--dot"></div>
+      <div class="loader--dot"></div>
+      <div class="loader--dot"></div>
+      <div class="loader--dot"></div>
+      <div class="loader--dot"></div>
+      <div class="loader--dot"></div>
+      <div class="loader--text">Loading...</div>
     </div>
   </div>
+
+  <section>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="./questions.js"></script>
+    <div id="quiz">
+      <h1 id="quiz-name"></h1>
+      <button id="next-question-button">Next Question</button>
+      <button id="prev-question-button">Previous</button>
+      
+      <div id="quiz-results">
+        <p id="quiz-results-message"></p>
+        <p id="quiz-results-score"></p>
+        <button id="quiz-retry-button">Retry</button>
+      </div>
+    </div>
+  </section>
+
+
+
+  <script>
+// Loading Screen
+function hideLoader() {
+  loader.style.display = "none";
+}
+
+var buttons = document.querySelectorAll("#quiz button");
+
+var loader = document.querySelector(".preload");
+
+buttons.forEach(function(button) {
+  button.addEventListener("click", function() {
+    var loaderDots = document.querySelectorAll(".loader--dot");
+    loaderDots.forEach(function(dot, index) {
+      dot.style.animationDelay = (index * 0.2) + "s";
+    });
+    loader.style.display = "flex";
+
+    setTimeout(hideLoader, 3000);
+  });
+});
+
+setTimeout(hideLoader, 3000);
+
+  </script>
 </body>
 </html>

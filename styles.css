@@ -1,146 +1,130 @@
+:root {
+  --loader-width: 250px;
+  --loader-dot-size: 20px;
+}
+
+.preload {
+  height: 100vh;
+  width: 100%;
+  font-family: Helvetica;
+  position: fixed;
+  top: 0;
+  background: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 0.5s ease;
+  z-index: 9999;
+}
 
 
-* {
-    margin: 0px;
-    padding: 0px;
-    font: 16px 'Source Sans Pro', sans-serif;
-    border: none;
-    box-sizing: border-box;
+.loader {
+  height: var(--loader-dot-size);
+  width: var(--loader-width);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.loader--dot {
+  animation: loader 3s ease-in-out infinite;
+  height: var(--loader-dot-size);
+  width: var(--loader-dot-size);
+  border-radius: 50%;
+  background-color: black;
+  position: absolute;
+  border: 2px solid white;
+}
+
+.loader--dot:first-child {
+  background-color: #8cc759;
+  animation-delay: 0.5s;
+}
+
+.loader--dot:nth-child(2) {
+  background-color: #8c6daf;
+  animation-delay: 0.4s;
+}
+
+.loader--dot:nth-child(3) {
+  background-color: #ef5d74;
+  animation-delay: 0.3s;
+}
+
+.loader--dot:nth-child(4) {
+  background-color: #f9a74b;
+  animation-delay: 0.2s;
+}
+
+.loader--dot:nth-child(5) {
+  background-color: #60beeb;
+  animation-delay: 0.1s;
+}
+
+.loader--dot:nth-child(6) {
+  background-color: #fbef5a;
+  animation-delay: 0s;
+}
+
+.loader--text {
+  position: absolute;
+
+  top: calc(100% + 20px);
+  left: 50%;
+  transform: translateX(-50%);
+  font-weight: bold;
+  color: black;
+  font-size: 25px;
+}
+
+@keyframes loader {
+  15% {
+    transform: translateX(0);
+  }
+  45%, 65% {
+    transform: translateX(calc(var(--loader-width) - var(--loader-dot-size)));
+  }
+  95% {
+    transform: translateX(0);
   }
   
-  html, body {
-    background: #2E706C;
-    text-align: center;
-    width: 50%;
-    height: 50%;
-    margin: 5rem;
-    bottom: 2rem;
-    right: 2rem;
+}
+
+@keyframes loading-text {
+  0% {
+    content: "Loading";
   }
-  
-  html {
-    display: table;
+  25% {
+    content: "Loading.";
   }
-  
-  body {
-    display: table-cell;
-    vertical-align: middle;
+  50% {
+    content: "Loading..";
   }
-  
-  #quiz {
-    margin: -44px 50px 0px;
-    position: relative;
-    width: calc(100% - 100px);
+  75% {
+    content: "Loading...";
   }
-  
-  #quiz h1 {
-    color: #FAFAFA;
-    font-weight: 600;
-    font-size: 36px;
-    text-transform: uppercase;
-    text-align: left;
-    line-height: 44px;
-  }
-  
-  #quiz button {
-    float: left;
-    margin: 8px 0px 0px 8px;
-    padding: 4px 8px;
-    background: #9ACFCC;
-    color: #00403C;
-    font-size: 14px;
-    cursor: pointer;
-    outline: none;
-  }
-  
-  #quiz button:hover {
-    background: #36a39c;
-    color: #FFF;
-  }
-  
-  #quiz button:disabled {
-    opacity: 0.5;
-    background: #9ACFCC;
-    color: #00403C;
-    cursor: default;
-  }
-  
-  #question {
-    padding: 20px;
-    background: #FAFAFA;
-    text-align: center;
-  }
-  
-  #question h2 {
-    margin-bottom: 16px;
-    font-weight: 600;
-    font-size: 20px;
-  }
-  
-  #question input[type=radio] {
-    display: none;
-  }
-  
-  #question label {
-    display: inline-block;
-    margin: 4px;
-    padding: 8px;
-    background: #FAE3BB;
-    color: #4C3000;
-    width: calc(50% - 8px);
-    min-width: 50px;
-    cursor: pointer;
-  }
-  
-  #question label:hover {
-    background: #EBBB67;
-  }
-  
-  #question input[type=radio]:checked + label {
-    background: #CB8306;
-    color: #FAFAFA;
-  }
-  
-  #quiz-results {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    position: absolute;
-    top: 44px;
-    left: 0px;
-    background: #FAFAFA;
-    width: 100%;
-    height: calc(100% - 44px);
-  }
-  
-  #quiz-results-message {
-    display: block;
-    color: #00403C;
-    font-size: 20px;
-    font-weight: bold;
-  }
-  
-  #quiz-results-score {
-    display: block;
-    color: #31706c;
-    font-size: 20px;
-  }
-  
-  #quiz-results-score b {
-    color: #00403C;
-    font-weight: 600;
-    font-size: 20px;
-  }
-  
-  #quiz-retry-button {
-  
-    float: left;
-    margin: 8px 0px 0px 8px;
-    padding: 4px 8px;
-    background: #9ACFCC;
-    color: #00403C;
-    font-size: 14px;
-    cursor: pointer;
-    outline: none;
-    
-  }
+}
+
+/* Update the font family to a more appealing one */
+body {
+  font-family: Arial, sans-serif;
+}
+
+/* Add animation to buttons */
+#quiz button {
+  background: linear-gradient(45deg, #4CAF50, #2196F3);
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 0 10px;
+  transition: transform 0.3s ease-in-out;
+}
+
+/* Add hover effect to buttons */
+#quiz button:hover {
+  transform: scale(1.05);
+}
+
