@@ -1,13 +1,70 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React + TS</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="main.js" type="module"></script>
+</head>
+<body> 
+  <div class="preload">
+    <div class="loader">
+      <div class="loader--dot"></div>
+      <div class="loader--dot"></div>
+      <div class="loader--dot"></div>
+      <div class="loader--dot"></div>
+      <div class="loader--dot"></div>
+      <div class="loader--dot"></div>
+      <div class="loader--text">Loading...</div>
+    </div>
+  </div>    
+  <section>
+    <div id="quiz">
+      <div class="container">
+        <img src="C:\Users\Lenovo Laptop\Desktop\expectation.jpg" class="centerIMG">
+        <div class="button-column">
+          <button id="next-question-button" class="quiz-button category-a">Option A</button>
+          <button id="next-question-button" class="quiz-button category-c">Option C</button>
+        </div>
+        <div class="button-column">
+          <button id="next-question-button" class="quiz-button category-b">Option B</button>
+          <button id="next-question-button" class="quiz-button category-d">Option D</button>
+        </div>
+      </div>
+      <button id="prev-question-button">Previous</button>
+      
+      <div id="quiz-results">
+        <p id="quiz-results-message"></p>
+        <p id="quiz-results-score"></p>
+        <button id="quiz-retry-button">Retry</button>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Loading Screen
+    function hideLoader() {
+      loader.style.display = "none";
+    }
+
+    var buttons = document.querySelectorAll("#quiz button");
+
+    var loader = document.querySelector(".preload");
+
+    buttons.forEach(function(button) {
+      button.addEventListener("click", function() {
+        var loaderDots = document.querySelectorAll(".loader--dot");
+        loaderDots.forEach(function(dot, index) {
+          dot.style.animationDelay = (index * 0.2) + "s";
+        });
+        loader.style.display = "flex";
+
+        setTimeout(hideLoader, 3000);
+      });
+    });
+
+    setTimeout(hideLoader, 3000); // when done set it back to 3000 in settimeout()
+  </script>
+</body>
 </html>

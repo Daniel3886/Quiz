@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Test Registration</title>
+    <link rel="stylesheet" href="StylesForLogin.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="scripts/login.js" type="module"></script>
+</head>
+
+<body>
+    <div class="main">
+        <h1>Test</h1>
+        <h3>Choose your role and enter your credentials</h3>
+        <form id="loginForm">
+            <label for="role">Select your role:</label>
+            <select id="role" name="role" required>
+                <option value="teacher">Teacher</option>
+                <option value="student">Student</option>
+            </select>
+
+            <div id="loginFields">
+                <label for="email">Email:</label>
+                <input type="text" id="email" name="email" placeholder="Enter your Email">
+
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" placeholder="Enter your Password">
+            </div>
+
+            <div class="wrap">
+                <button type="submit">Continue</button>
+            </div>
+        </form>
+        <p>Not registered? <a href="#" style="text-decoration: none;">Create an account</a></p>
+    </div>
+
+    <script>
+        function login() {
+            var form = document.getElementById("loginForm");
+            var role = form.elements["role"].value;
+            var email = form.elements["email"].value;
+            var password = form.elements["password"].value;
+
+            if (role === "teacher") {
+                if (email.trim() === "" || password.trim() === "") {
+                    alert("Please enter both email and password for teacher login.");
+                    return;
+                }
+                console.log("Logging in as a teacher...");
+            } else if (role === "student") {
+                // No need to validate email and password for student role
+                window.location.href = "index.html";
+            } else {
+                console.log("Invalid role selected");
+            }
+        }
+
+        document.getElementById("loginForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent form submission
+            login(); // Call the login function to handle form submission
+        });
+
+        document.getElementById("role").addEventListener("change", function() {
+            var loginFields = document.getElementById("loginFields");
+            if (this.value === "teacher") {
+                loginFields.style.display = "block";
+            } else {
+                loginFields.style.display = "none";
+            }
+        });
+    </script>
+
+</body>
+
+</html>
