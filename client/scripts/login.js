@@ -2,7 +2,7 @@ export function login(email, password) {
     return axios.post('http://localhost:3005/auth/login', {
         email,
         password,
-    });
+    }, { withCredentials: true });
 }
 
 const loginForm = document.getElementById('loginForm');
@@ -13,7 +13,5 @@ loginForm.addEventListener('submit', async (event) => {
     const formData = new FormData(loginForm);
     const email = formData.get('email');
     const password = formData.get('password');
-    const response = await login(email, password)
-    alert(JSON.stringify(response)); 
+    const { data } = await login(email, password);
 })
-//npm run dev:server

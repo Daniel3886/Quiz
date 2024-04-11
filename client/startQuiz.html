@@ -1,0 +1,42 @@
+<html>
+
+<head>
+    <title>Start Quiz</title>
+</head>
+
+<body>
+    <h1>Create a New Test</h1>
+    <form id="createTestForm">
+        <label for="testName">Test Name:</label>
+        <input type="text" id="testName" name="name" required>
+
+        <label for="testDescription">Test Description:</label>
+        <textarea id="testDescription" name="description" required></textarea>
+
+        <label for="testSubject">Test Subject:</label>
+        <input type="text" id="testSubject" name="subject" required>
+
+        <button type="submit">Create Test</button>
+    </form>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        document.getElementById("createTestForm").addEventListener("submit", async function(event) {
+            event.preventDefault();
+
+            const form = event.target;
+            const formData = new FormData(form);
+
+            try {
+                const response = await axios.post('http://127.0.0.1:5500/tests', formData);
+                console.log(response.data);
+                alert("Test created successfully!");
+            } catch (error) {
+                console.error("Error creating test:", error);
+                alert("An error occurred while creating the test. Please try again later.");
+            }
+        });
+    </script>
+</body>
+
+</html>

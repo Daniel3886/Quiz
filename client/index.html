@@ -22,6 +22,8 @@
   <section>
     <div id="quiz">
       <div class="container">
+        <h1 class="centerIMG">Question 1</h1>
+        <p>What is the capital of France?</p>
         <img src="C:\Users\Lenovo Laptop\Desktop\expectation.jpg" class="centerIMG">
         <div class="button-column">
           <button id="next-question-button" class="quiz-button category-a">Option A</button>
@@ -31,13 +33,6 @@
           <button id="next-question-button" class="quiz-button category-b">Option B</button>
           <button id="next-question-button" class="quiz-button category-d">Option D</button>
         </div>
-      </div>
-      <button id="prev-question-button">Previous</button>
-      
-      <div id="quiz-results">
-        <p id="quiz-results-message"></p>
-        <p id="quiz-results-score"></p>
-        <button id="quiz-retry-button">Retry</button>
       </div>
     </div>
   </section>
@@ -60,11 +55,11 @@
         });
         loader.style.display = "flex";
 
-        setTimeout(hideLoader, 3000);
+        setTimeout(hideLoader, 1000);
       });
     });
 
-    setTimeout(hideLoader, 3000); // when done set it back to 3000 in settimeout()
+    setTimeout(hideLoader, 1000); // when done set it back to 3000 in settimeout()
   </script>
 </body>
 </html>
