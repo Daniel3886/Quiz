@@ -1,37 +1,16 @@
-import {
-  ArrayMinSize,
-  IsArray,
-  IsEnum,
-  IsInt,
-  IsOptional,
-  IsString,
-  Min,
-  ValidateNested,
-} from 'class-validator';
-import { Type } from 'class-transformer';
+import { ArrayMinSize, IsEnum, IsOptional } from 'class-validator';
 import { $Enums } from '@prisma/client';
+import { ApiProperty, IntersectionType } from '@nestjs/swagger';
+import { TransformToArray } from 'src/utils/validation/transform-to-array.decorator';
+import { AuthorIdDto } from 'src/utils/validation/dtos/author-Id.dto';
+import { PaginationDto } from 'src/utils/validation/dtos/pagination.dto';
+import { SearchDto } from 'src/utils/validation/dtos/search.dto';
 
-export class GetTestsDto {
-  @IsInt()
-  @Min(1)
-  @Type(() => Number)
+export class GetTestsDto extends IntersectionType(AuthorIdDto(), PaginationDto(), SearchDto()) {
   @IsOptional()
-  limit?: number;
-
-  @IsInt()
-  @Min(1)
-  @Type(() => Number)
-  @IsOptional()
-  page?: number;
-
-  @IsString()
-  @IsOptional()
-  search?: string;
-
-  @IsArray()
+  @ApiProperty({ enumName: 'Subject', enum: $Enums.Subject, isArray: true })
   @ArrayMinSize(1)
-  @ValidateNested({ each: true })
-  @Type(() => String)
   @IsEnum($Enums.Subject, { each: true })
+  @TransformToArray()
   subjects?: $Enums.Subject[];
 }

@@ -18,6 +18,13 @@ enum Role {
   ADMIN
 }
 
+enum Type {
+  MULTIPLE_CHOICE
+  SINGLE_CHOICE
+  TRUE_FALSE
+  SHORT_ANSWER
+}
+
 enum Subject {
   MATH
   ENGLISH
@@ -51,12 +58,14 @@ model User {
   updatedAt DateTime   @updatedAt
   questions Question[]
   tests     Test[]
+  Exam      Exam[]
 }
 
 model Question {
   id            Int            @id @default(autoincrement())
   title         String
   author        User?          @relation(fields: [authorId], references: [id])
+  type          Type
   answers       Json
   createdAt     DateTime       @default(now())
   authorId      Int?
@@ -73,6 +82,7 @@ model Test {
   Author        User?          @relation(fields: [authorId], references: [id])
   createdAt     DateTime       @default(now())
   testQuestions TestQuestion[]
+  Exam          Exam[]
 }
 
 model TestQuestion {
@@ -83,4 +93,25 @@ model TestQuestion {
   timeLimit  Int
   testId     Int
   questionId Int
+  results    Result[]
+}
+
+model Result {
+  id             Int          @id @default(autoincrement())
+  exam           Exam         @relation(fields: [examId], references: [id])
+  testQuestion   TestQuestion @relation(fields: [testQuestionId], references: [id])
+  studentName    String
+  studentAnswer  Json?
+  testQuestionId Int
+  examId         Int
+}
+
+model Exam {
+  id        Int      @id @default(autoincrement())
+  author    User     @relation(fields: [authorId], references: [id])
+  test      Test     @relation(fields: [testId], references: [id])
+  results   Result[]
+  authorId  Int
+  testId    Int
+  createdAt DateTime @default(now())
 }
